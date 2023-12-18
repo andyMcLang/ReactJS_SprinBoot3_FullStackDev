@@ -1,5 +1,5 @@
 function HelloWorld() {
-    return <h1>Hellou maailma!</h1>
+    return <h1 className="text-center">Hellou maailma!</h1>
 }
 
 export default HelloWorld
