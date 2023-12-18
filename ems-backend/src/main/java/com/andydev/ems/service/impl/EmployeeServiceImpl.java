@@ -59,5 +59,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 () -> new ResourceNotFoundException("Työntekijää ei löydy tällä id numerolla: " + employeeId)
         );
 
+        employeeRepository.deleteById(employeeId);
     }
 }
