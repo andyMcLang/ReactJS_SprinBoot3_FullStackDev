@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { createEmployee } from "../services/EmployeeService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EmployeeComponent = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
+  const { id } = useParams();
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
@@ -60,13 +61,20 @@ const EmployeeComponent = () => {
     return valid;
   }
 
+  function pageTitle() {
+    if (id) {
+      return <h2 className="text-center">Päivitä työntekijä</h2>;
+    } else {
+      return <h2 className="text-center">Lisää työntekijä</h2>;
+    }
+  }
   return (
     <div className="container">
       <br />
       <br />
       <div className="row">
         <div className="card col-md-6 offset-md-3 offset-md-3">
-          <h2 className="text-center">Add Employee</h2>
+          {pageTitle()}
           <div className="card-body">
             <form>
               <div className="form-group mb-2">
@@ -110,9 +118,7 @@ const EmployeeComponent = () => {
                   placeholder="Enter Employee Email"
                   name="email"
                   value={email}
-                  className={`form-control ${
-                    errors.email ? "is-invalid" : ""
-                  }`}
+                  className={`form-control ${errors.email ? "is-invalid" : ""}`}
                   onChange={(e) => setEmail(e.target.value)}
                 ></input>
                 {errors.email && (

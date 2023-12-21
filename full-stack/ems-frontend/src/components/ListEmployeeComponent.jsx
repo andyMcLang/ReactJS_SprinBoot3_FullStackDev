@@ -18,14 +18,18 @@ const ListEmployeeComponent = () => {
   }, []);
 
   function addNewEmployee() {
-    navigator('/add-employee')
+    navigator("/add-employee");
+  }
+
+  function updateEmployee(id) {
+    navigator(`/edit-employee/${id}`);
   }
 
   return (
     <div className="container">
       <h2 className="text-center">Lista työntekijöistä</h2>
       <button className="btn btn-primary mb-2" onClick={addNewEmployee}>
-        Add Employee
+        Lisää työntekijä
       </button>
       <table className="table table-striped table-bordered">
         <thead>
@@ -34,6 +38,7 @@ const ListEmployeeComponent = () => {
             <th>Tt etunimi</th>
             <th>Tt sukunimi</th>
             <th>Tt sähköpostiosoite</th>
+            <th>Toiminnot</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +48,14 @@ const ListEmployeeComponent = () => {
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
               <td>{employee.email}</td>
+              <td>
+                <button
+                  className="btn btn-info"
+                  onClick={() => updateEmployee(employee.id)}
+                >
+                  Päivitä
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
